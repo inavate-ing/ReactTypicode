@@ -1,30 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Navbar, Button} from 'react-bootstrap';
-import axios from 'axios';
 
-const fetchData = () => {
-    return axios.get('https://jsonplaceholder.typicode.com/users')
-        .then(({data}) => {
-            return data
-        }).catch(err => {
-            console.error(err);
-        });
-}
+import DataFetching from "../Api/DataFetching";
 
-const getUserName = userInfo => {
-    return `${userInfo.name}`;
-}
-
-
-function Home() {
-
-    const [userInfos, setUserInfos] = useState([]);
-
-    useEffect(() => {
-        fetchData().then(randomData => {
-            setUserInfos(randomData);
-        });
-    }, [])
+export default function Home() {
 
     return (
         <div>
@@ -33,18 +12,7 @@ function Home() {
                 <Button variant="outline-primary ml-auto">Create New User</Button>
             </Navbar>
 
-            <div className="container">
-                    {
-                        userInfos.map((userInfo, idx) => (
-                            <div key={idx} className="userCard">
-                                {getUserName(userInfo)}
-                            </div>
-                        ))
-                    }
-            </div>
-
+            <DataFetching />
         </div>
     );
 }
-
-export default Home;
