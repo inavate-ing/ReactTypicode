@@ -1,5 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
-.App {
-    font-family: 'Montserrat', sans-serif;
+body{
+    background: rgb(0,0,0);
 }
+
+.App {
+    background: rgb(6,9,15);
+    font-family: 'Montserrat', sans-serif;
+    max-width: 30rem;
+    min-height: 100vh;
+    margin: 0 auto;
+}
+
+#navbar {
+    background: rgb(22,27,34);
+}
+
+.userCard {
+    padding: 1rem 1.2rem;
+    background: rgb(13,17,23);
+    color: white;
+    margin: 1rem 0;
+    cursor: pointer;
+}
+
