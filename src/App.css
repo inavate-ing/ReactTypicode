@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     background: rgb(0,0,0);
 }
 
 .App {
-    background: rgb(6,9,15);
+    background: rgb(6,9,15) !important;
     font-family: 'Montserrat', sans-serif;
     max-width: 30rem;
     min-height: 100vh;
@@ -20,7 +24,39 @@ body{
     padding: 1rem 1.2rem;
     background: rgb(13,17,23);
     color: white;
-    margin: 1rem 0;
+    margin: 1rem 1rem;
     cursor: pointer;
 }
+
+.userInfo {
+    width: 94%;
+    margin: 1rem auto !important;
+    background: rgb(13,17,23);
+}
+
+.userButtons {
+    background: transparent;
+    margin: 0 0.5rem;
+    transition: 0.3s ease-in-out;
+}
+
+
+.anchorLink {
+    color:white !important;
+    text-decoration: none;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.go-back{
+    background: transparent;
+}
+
 
