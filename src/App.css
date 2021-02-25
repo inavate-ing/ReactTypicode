@@ -55,8 +55,12 @@ body{
     -webkit-transform: rotate(135deg);
 }
 
-.go-back{
+.nav-button{
     background: transparent;
+}
+.addUser{
+    padding: 0.5rem 1rem;
+    color: white;
 }
 
 

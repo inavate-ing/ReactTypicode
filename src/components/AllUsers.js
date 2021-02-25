@@ -1,41 +1,41 @@
 import React, {useEffect, useState} from 'react';
-import {Navbar} from "react-bootstrap";
-import axios from 'axios';
+import {Button, Navbar} from "react-bootstrap";
+import {getUsers} from "../request/Request";
 import {Link} from 'react-router-dom';
 
-export default function DataFetching() {
+export default function AllUsers() {
 
     const [Users, setUsers] = useState([]);
 
-
     useEffect(() => {
-        axios
-            .get('https://jsonplaceholder.typicode.com/users')
-            .then(({data}) => {
-                setUsers(data);
-            }).catch(err => {
-            console.error(err)
+        getUsers().then((data) => {
+            setUsers(data);
         })
-
     }, [])
 
     return (
         <div>
 
-            <Navbar variant="dark sticky-top" id="navbar">
+            <Navbar variant="dark sticky-top justify-content-between" id="navbar">
                 <Navbar.Brand variant="mr-auto" href="#"> All Users </Navbar.Brand>
+                <Link to={"/addUser"}>
+                    <Button className="nav-button">Create New User</Button>
+                </Link>
+
             </Navbar>
 
 
             {
                 Users.map((Users, idx) => (
-                    <Link key={idx} to={"/user/"+Users.id}>
+                    <Link key={idx} to={"/user/" + Users.id}>
                         <div className="userCard">
                             {Users.name}
                         </div>
                     </Link>
                 ))
             }
+
+
         </div>
     )
 }

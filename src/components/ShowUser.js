@@ -1,29 +1,18 @@
 import React, {useState, useEffect} from 'react'
 import {Button, Card, Navbar} from "react-bootstrap";
-import axios from 'axios'
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import {getUserByID} from "../request/Request";
 
 function ShowUser() {
 
     const [User, setUser] = useState({})
 
-    let userID = window.location.href;
-    if (userID[userID.length - 1] === "/") {
-        userID = userID[userID.length - 2];
-    } else {
-        userID = userID[userID.length - 1];
-    }
-
+    let { id: userID } = useParams();
 
     useEffect(() => {
-        axios
-            .get(`https://jsonplaceholder.typicode.com/users/${userID}`)
-            .then(({data}) => {
-                setUser(data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+       getUserByID(userID).then((data) => {
+           setUser(data);
+       })
     }, [userID])
 
     return (
@@ -32,7 +21,7 @@ function ShowUser() {
 
             <Navbar variant="dark" id="navbar">
                 <Link to={"/"}>
-                    <Button className="mr-sm-2 go-back">Go Back</Button>
+                    <Button className="mr-sm-2 nav-button">Go Back</Button>
                 </Link>
                 <Navbar.Brand variant="mr-auto"> {User.name} </Navbar.Brand>
             </Navbar>
