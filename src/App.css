@@ -1,37 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
-body{
-    background: rgb(0,0,0);
+body {
+    background: rgb(0, 0, 0);
 }
 
 .App {
-    background: rgb(6,9,15) !important;
+    background: rgb(6, 9, 15) !important;
     font-family: 'Montserrat', sans-serif;
     max-width: 30rem;
     min-height: 100vh;
     margin: 0 auto;
 }
 
+
 #navbar {
-    background: rgb(22,27,34);
+    background: rgb(22, 27, 34);
 }
 
+.postsCard,
 .userCard {
     padding: 1rem 1.2rem;
-    background: rgb(13,17,23);
+    background: rgb(13, 17, 23);
     color: white;
     margin: 1rem 1rem;
     cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+
+.postsCard:hover,
+.userCard:hover {
+    background: black;
 }
 
 .userInfo {
     width: 94%;
     margin: 1rem auto !important;
-    background: rgb(13,17,23);
+    background: rgb(13, 17, 23);
+}
+
+.commentCard {
+    width: 94%;
+    margin: 1rem auto !important;
+    background: rgb(13, 17, 23);
+}
+
+.commentCard .h5 {
+    font-size: 1.1rem;
+}
+
+.commentCard p,
+.commentCard h6 {
+    font-size: 0.8rem;
 }
 
 .userButtons {
@@ -42,7 +66,7 @@ body{
 
 
 .anchorLink {
-    color:white !important;
+    color: white !important;
     text-decoration: none;
 }
 
@@ -55,12 +79,20 @@ body{
     -webkit-transform: rotate(135deg);
 }
 
-.nav-button{
+.nav-button {
     background: transparent;
 }
-.addUser{
+
+.addTodo,
+.addPost,
+.addUser {
     padding: 0.5rem 1rem;
     color: white;
+}
+
+.heading {
+    color: white;
+    padding: 0 1.2rem;
 }
 
 

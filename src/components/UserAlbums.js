@@ -4,7 +4,7 @@ import {Link, useParams} from "react-router-dom";
 import {getAlbumByUser, getUserByID} from "../request/Request";
 
 
-function ShowUser() {
+function UserAlbums() {
 
     const [Albums, setAlbums] = useState([])
     const [User, setUser] = useState({})
@@ -44,4 +44,4 @@ function ShowUser() {
     )
 }
 
-export default ShowUser;
+export default UserAlbums;
