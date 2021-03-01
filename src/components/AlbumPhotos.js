@@ -34,6 +34,10 @@ function UserPost() {
             }).finally(() => {
                 setLoading(false)
             })
+        }).catch((reason) => {
+            setError(reason)
+        }).finally(() => {
+            setLoading(false)
         })
 
 
