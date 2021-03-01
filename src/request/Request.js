@@ -5,10 +5,10 @@ export const getUsers = () => {
         axios
             .get('/users')
             .then(({data}) => {
-                resolve(data || ["No Users Found"]);
+                resolve(data );
             }).catch(err => {
             console.error(err);
-            reject(["Something went wrong"])
+            reject("No Users Found")
         })
     })
 }
@@ -21,7 +21,7 @@ export const getUserByID = (userID) => {
             })
             .catch(err => {
                 console.log(err)
-                reject(["Something went wrong"])
+                reject("No User Found")
             })
 
     })
@@ -38,7 +38,22 @@ export const getPostByID = (postID) => {
             })
             .catch(err => {
                 console.log(err)
-                reject(["Something went wrong"])
+                reject("No Post Found")
+            })
+
+    })
+}
+
+export const getAlbumByID = (albumID) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`/albums/${albumID}`)
+            .then(({data}) => {
+                resolve(data)
+            })
+            .catch(err => {
+                console.log(err)
+                reject("No Album Found")
             })
 
     })
@@ -53,22 +68,38 @@ export const getAlbumByUser = (userID) => {
             })
             .catch(err => {
                 console.log(err)
-                reject(["Something went wrong"])
+                reject("No Albums Found")
             })
 
     })
 }
+
+export const getPhotoByAlbum = (albumID) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`/albums/${albumID}/photos`)
+            .then(({data}) => {
+                resolve(data)
+            })
+            .catch(err => {
+                console.log(err)
+                reject("No Photos Found")
+            })
+
+    })
+}
+
 
 export const getPostsByUser = (userID) => {
     return new Promise((resolve, reject) => {
         axios
             .get(`/users/${userID}/posts`)
             .then(({data}) => {
-                resolve(data)
+                    resolve(data)
             })
             .catch(err => {
                 console.log(err)
-                reject(["Something went wrong"])
+                reject("No Post Found")
             })
 
     })
@@ -83,7 +114,7 @@ export const getTodosByUser = (userID) => {
             })
             .catch(err => {
                 console.log(err)
-                reject(["Something went wrong"])
+                reject("No Todo Found")
             })
 
     })
@@ -98,11 +129,12 @@ export const getCommentsByPost = (postId) => {
             })
             .catch(err => {
                 console.log(err)
-                reject(["Something went wrong"])
+                reject("No Comment Found")
             })
 
     })
 }
+
 
 
 export const addNewUser = (user) => {
@@ -115,7 +147,7 @@ export const addNewUser = (user) => {
             })
             .catch(err => {
                 console.log(err)
-                reject(["Something went wrong"])
+                reject("Something went wrong")
             })
 
     })
@@ -131,7 +163,7 @@ export const addNewPost = (post) => {
             })
             .catch(err => {
                 console.log(err)
-                reject(["Something went wrong"])
+                reject("Something went wrong")
             })
 
     })
@@ -147,7 +179,7 @@ export const addNewTodo = (todo) => {
             })
             .catch(err => {
                 console.log(err)
-                reject(["Something went wrong"])
+                reject("Something went wrong")
             })
 
     })
@@ -155,33 +187,31 @@ export const addNewTodo = (todo) => {
 
 
 export const deletePostByID = (postId) => {
-    return new Promise(() => {
+    return new Promise((resolve) => {
         axios
             .delete(`/posts/${postId}`)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
+                resolve()
             })
 
     })
 }
 
-
-export const editTodo = (todoId, todo) => {
+export const editTodoByID = (todoId, completed) => {
     return new Promise((resolve, reject) => {
         axios
-            .put(`/todos/${todoId}`,todo)
-            .then((data) => {
-                resolve(data)
-                console.log(data)
-            })
-            .catch(err => {
-                console.log(err)
-                reject(["Something went wrong"])
-            })
+            .patch(`/todos/${todoId}`,{completed})
+            .then(res => {
+                resolve(res.data);
+            }).catch( () => {
+                reject("Something went wrong")
+        })
 
     })
 }
+
 
 
 

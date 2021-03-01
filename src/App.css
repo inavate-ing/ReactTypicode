@@ -31,7 +31,21 @@ body {
     transition: 0.3s ease-in-out;
 }
 
+.todoCard {
+    padding: 1rem 1.2rem;
+    background: rgb(13, 17, 23);
+    color: white;
+    margin: 1rem 1rem;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
 
+.todoCard:hover {
+    transform:  translateY(-3px);
+}
+
+
+.todoCard:hover,
 .postsCard:hover,
 .userCard:hover {
     background: black;
@@ -43,10 +57,21 @@ body {
     background: rgb(13, 17, 23);
 }
 
+.albumCard,
 .commentCard {
     width: 94%;
     margin: 1rem auto !important;
     background: rgb(13, 17, 23);
+    color: white;
+}
+
+.newButton {
+    width: 94%;
+    background: transparent;
+    margin-top: 1rem;
+    margin-left: 3%;
+    margin-right: 3%;
+    height: 4rem;
 }
 
 .commentCard .h5 {
@@ -70,15 +95,6 @@ body {
     text-decoration: none;
 }
 
-.arrow {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    transform: rotate(135deg);
-    -webkit-transform: rotate(135deg);
-}
-
 .nav-button {
     background: transparent;
 }
@@ -94,5 +110,14 @@ body {
     color: white;
     padding: 0 1.2rem;
 }
+
+.form-check-input {
+    opacity: 0;
+}
+
+.form-check-label {
+    cursor: pointer;
+}
+
 
 

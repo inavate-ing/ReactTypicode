@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Navbar, Form} from "react-bootstrap";
+import {Button, Navbar, Form, Spinner} from "react-bootstrap";
 import {Link} from 'react-router-dom';
 
 import {Formik, Field, Form as FormikForm} from "formik";
 import {addNewTodo, getTodosByUser} from "../request/Request";
+import ErrorMessage from "./ErrorMessage";
 
 export default function NewTodo() {
 
@@ -16,13 +17,34 @@ export default function NewTodo() {
     }
 
     const [Todos, setTodos] = useState([]);
+    const [Error, setError] = useState("");
+    const [Loading, setLoading] = useState(true);
 
     useEffect(() => {
         getTodosByUser(userId).then((data) => {
             setTodos(data);
+        }).catch((reason) => {
+            setError(reason)
+        }).finally(() => {
+            setLoading(false)
         })
 
     }, [userId])
+
+    if (Loading) {
+        return (
+            <div className="d-flex align-items-center justify-content-center vh-100">
+
+
+                <Spinner animation="border" variant="white"/>
+
+            </div>
+        )
+    }
+
+    if (Error) {
+        return (<ErrorMessage message={Error}/>)
+    }
 
 
 
@@ -33,7 +55,7 @@ export default function NewTodo() {
                 <Link to={"/user/"+userId+"/todos"}>
                     <Button className="mr-sm-2 nav-button">Go Back</Button>
                 </Link>
-                <Navbar.Brand href="#home">New Todo</Navbar.Brand>
+                <Navbar.Brand href="#home" className="ml-3">New Todo</Navbar.Brand>
             </Navbar>
             <Formik
                 initialValues={{

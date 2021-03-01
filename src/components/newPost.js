@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Navbar, Form} from "react-bootstrap";
+import {Button, Navbar, Form, Spinner} from "react-bootstrap";
 import {Link} from 'react-router-dom';
 
 import {Formik, Field, Form as FormikForm} from "formik";
 import {addNewPost, getPostsByUser} from "../request/Request";
+import ErrorMessage from "./ErrorMessage";
 
 export default function NewPost() {
 
@@ -16,14 +17,34 @@ export default function NewPost() {
     }
 
     const [Posts, setPosts] = useState([]);
+    const [Error, setError] = useState("");
+    const [Loading, setLoading] = useState(true);
 
     useEffect(() => {
         getPostsByUser(userId).then((data) => {
             setPosts(data);
+        }).catch((reason) => {
+            setError(reason)
+        }).finally(() => {
+            setLoading(false)
         })
 
     }, [userId])
 
+    if (Loading) {
+        return (
+            <div className="d-flex align-items-center justify-content-center vh-100">
+
+
+                <Spinner animation="border" variant="white"/>
+
+            </div>
+        )
+    }
+
+    if (Error) {
+        return (<ErrorMessage message={Error}/>)
+    }
 
     return (
         <div>
@@ -31,7 +52,7 @@ export default function NewPost() {
                 <Link to={"/user/"+userId+"/posts"}>
                     <Button className="mr-sm-2 nav-button">Go Back</Button>
                 </Link>
-                <Navbar.Brand href="#home">New Post</Navbar.Brand>
+                <Navbar.Brand href="#home" className="ml-3">New Post</Navbar.Brand>
             </Navbar>
             <Formik
                 initialValues={{

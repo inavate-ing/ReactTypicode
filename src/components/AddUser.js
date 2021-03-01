@@ -1,21 +1,42 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Navbar, Form, Col} from "react-bootstrap";
+import {Button, Navbar, Form, Col, Spinner} from "react-bootstrap";
 import {Link} from 'react-router-dom';
 
 import {Formik, Field, Form as FormikForm} from "formik";
 import {getUsers, addNewUser} from "../request/Request";
+import ErrorMessage from "./ErrorMessage";
 
 export default function AddUser() {
 
     const [Users, setUsers] = useState([]);
+    const [Error, setError] = useState("")
+    const [Loading, setLoading] = useState(true)
 
     useEffect(() => {
         getUsers().then((data) => {
             setUsers(data);
+        }).catch((reason) => {
+            setError(reason)
+        }).finally(() => {
+            setLoading(false)
         })
 
     }, [])
 
+    if (Loading) {
+        return (
+            <div className="d-flex align-items-center justify-content-center vh-100">
+
+
+                <Spinner animation="border" variant="white"/>
+
+            </div>
+        )
+    }
+
+    if (Error) {
+        return (<ErrorMessage message={Error}/>)
+    }
 
     return (
         <div>
@@ -23,7 +44,7 @@ export default function AddUser() {
                 <Link to={"/"}>
                     <Button className="mr-sm-2 nav-button">Go Back</Button>
                 </Link>
-                <Navbar.Brand href="#home">Add User</Navbar.Brand>
+                <Navbar.Brand href="#home" className="ml-3">Add User</Navbar.Brand>
             </Navbar>
             <Formik
                 initialValues={{

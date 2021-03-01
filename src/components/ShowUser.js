@@ -1,20 +1,40 @@
 import React, {useState, useEffect} from 'react'
-import {Button, Card, Navbar} from "react-bootstrap";
+import {Button, Card, Navbar, Spinner} from "react-bootstrap";
 import {Link, useParams} from "react-router-dom";
 import {getUserByID} from "../request/Request";
+import ErrorMessage from "./ErrorMessage";
 
 function ShowUser() {
 
     const [User, setUser] = useState({})
+    const [Error, setError] = useState("")
+    const [Loading, setLoading] = useState(true)
 
-    let { id: userID } = useParams();
+    let {id: userID} = useParams();
 
     useEffect(() => {
-       getUserByID(userID).then((data) => {
-           setUser(data);
-       })
+        getUserByID(userID).then((data) => {
+            setUser(data);
+        }).catch((reason) => {
+            setError(reason)
+        }).finally(() => {
+            setLoading(false)
+        })
     }, [userID])
 
+    if (Loading) {
+        return (
+            <div className="d-flex align-items-center justify-content-center vh-100">
+
+
+                <Spinner animation="border" variant="white"/>
+
+            </div>
+        )
+    }
+    if (Error) {
+        return (<ErrorMessage message={Error}/>)
+    }
     return (
         <div>
 
@@ -23,7 +43,7 @@ function ShowUser() {
                 <Link to={"/"}>
                     <Button className="mr-sm-2 nav-button">Go Back</Button>
                 </Link>
-                <Navbar.Brand variant="mr-auto"> {User.name} </Navbar.Brand>
+                <Navbar.Brand variant="mr-auto ml-3"> {User.name} </Navbar.Brand>
             </Navbar>
 
             <Card className="userInfo" text="white">
@@ -36,7 +56,8 @@ function ShowUser() {
                         Phone Number : {User.phone} <br/>
                         <span className="text-muted">
                         Address : <br/>
-                            {User.address ? User.address.street : ""}, {User.address ? User.address.suite : ""} <br/>
+                            {User.address ? User.address.street : ""}, {User.address ? User.address.suite : ""}
+                            <br/>
                             {User.address ? User.address.city : ""}, {User.address ? User.address.zipcode : ""}
                     </span>
                     </Card.Text>

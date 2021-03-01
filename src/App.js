@@ -13,6 +13,7 @@ import UserAlbums from "./components/UserAlbums";
 import UserPost from "./components/UserPost";
 import newPost from "./components/newPost";
 import newTodo from "./components/newTodo";
+import AlbumPhotos from "./components/AlbumPhotos";
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                     <Route exact path={"/addUser"} component={AddUser} />
                     <Route exact path={"/newPost"} component={newPost} />
                     <Route exact path={"/newTodo"} component={newTodo} />
+                    <Route exact path={"/album/:albumId"} component={AlbumPhotos} />
                 </Switch>
 
             </Router>
