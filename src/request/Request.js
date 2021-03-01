@@ -187,14 +187,16 @@ export const addNewTodo = (todo) => {
 
 
 export const deletePostByID = (postId) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve,reject) => {
         axios
             .delete(`/posts/${postId}`)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
                 resolve()
-            })
+            }).catch((err) => {
+                reject("something went wrong")
+        })
 
     })
 }

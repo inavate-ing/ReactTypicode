@@ -20,6 +20,7 @@ function UserPost() {
     useEffect(() => {
         getPostByID(postID).then((data) => {
             setPost(data);
+
             getUserByID(data.userId).then((user) => {
                 setUser(user)
             }).catch((reason) => {
@@ -35,6 +36,11 @@ function UserPost() {
             }).finally(() => {
                 setLoading(false)
             })
+
+        }).catch((reason) => {
+            setError(reason)
+        }).finally(() => {
+            setLoading(false)
         })
 
 
