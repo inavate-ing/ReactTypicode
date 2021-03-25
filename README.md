@@ -1,5 +1,5 @@
 # Project For Ecara
-This is a Development Project as a Test
+This is a Development Project for API CONSUMPTION in ReactJS using axios and hooks
 
 ## Available Scripts
 
